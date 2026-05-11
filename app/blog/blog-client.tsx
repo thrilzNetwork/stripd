@@ -174,7 +174,7 @@ export default function BlogClient() {
           {filtered.map((post) => (
             <Link
               key={post.id}
-              href={`/blog/${post.id}`}
+              href={`/blog?id=${post.id}`}
               className="group block rounded-2xl border border-white/[0.08] bg-[#0A0A0A] p-6 transition-all duration-300 hover:border-white/20 hover:bg-[#111111]"
             >
               <div className="flex items-center gap-2 mb-3">
