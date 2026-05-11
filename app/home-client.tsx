@@ -15,7 +15,13 @@ function Header({ cartCount }: { cartCount: number }) {
       <Link href="/" className="text-xl font-bold tracking-tight text-white">
         STRIPD
       </Link>
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-4">
+        <Link href="/blog" className="text-[12px] font-medium text-white/40 hover:text-white/80 transition">
+          Blog
+        </Link>
+        <Link href="/about" className="text-[12px] font-medium text-white/40 hover:text-white/80 transition">
+          Our Story
+        </Link>
         <Link href="/cart" className="relative text-white">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
@@ -27,13 +33,6 @@ function Header({ cartCount }: { cartCount: number }) {
             </span>
           )}
         </Link>
-        <button className="text-white">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="18" x2="21" y2="18"/>
-          </svg>
-        </button>
       </div>
     </header>
   );
@@ -103,19 +102,22 @@ function ProductCard({
     >
       <div className="relative flex items-center justify-center p-8 pb-5">
         <div className="relative">
-          <div className="absolute inset-0 -m-4 rounded-full bg-red-900/20 blur-2xl" />
+          <div
+            className="absolute inset-0 -m-4 rounded-full opacity-20 blur-2xl"
+            style={{ backgroundColor: product.color }}
+          />
           <img
             src={`/products/${product.id}.png`}
             alt={product.name}
-            className="relative w-[140px] h-[140px] object-contain"
+            className="relative w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] object-contain"
           />
         </div>
         <div className="absolute top-4 left-4 flex gap-1.5">
-          <span className="px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide uppercase text-white/70 border border-white/10">
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide uppercase text-white/50 border border-white/10">
             {product.category}
           </span>
-          {index === 0 && (
-            <span className="px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide uppercase text-black bg-white">
+          {product.id === "recover" && (
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide uppercase text-black bg-white">
               BEST SELLER
             </span>
           )}
