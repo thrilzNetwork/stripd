@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 const posts: Record<string, { title: string; content: string; date: string; category: string }> = {
   "why-oral-strips": {
@@ -175,9 +174,8 @@ Remember: supplements work best as part of a comprehensive sleep routine, not as
   },
 };
 
-export default function BlogPostClient() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+export default function BlogPostDetail({ postId }: { postId: string }) {
+  const id = postId;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => setVisible(true), []);

@@ -1,10 +1,10 @@
 import { Suspense } from "react";
-import BlogPostClient from "./post-client";
+import BlogRouter from "./blog-router";
 
-export default function BlogPostPage() {
+export default function BlogPage() {
   return (
     <Suspense fallback={<div className="min-h-dvh bg-black" />}>
-      <BlogPostClient />
+      <BlogRouter />
     </Suspense>
   );
 }
