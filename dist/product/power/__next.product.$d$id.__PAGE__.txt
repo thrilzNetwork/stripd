@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[6016,["/_next/static/chunks/0ocb95g47eo.k.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0xywy_s9uqii1.js"],"default"]
-3:I[97367,["/_next/static/chunks/0ocb95g47eo.k.js","/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"product":{"id":"power","name":"Power Stripd","tagline":"Clean energy without the crash.","category":"Cognitive","original":"Energy Strips","flavor":"Cranberry","color":"#FF0055","ingredients":"L-Theanine, Caffeine, Vitamin B12 (Methylcobalamin)","amount":"30 oral strips","description":"Sustained energy and mental clarity in a quick-dissolving strip. Formulated with L-Theanine, Caffeine, and Vitamin B12 for enhanced focus and physical endurance without the jitters or crash.","benefits":["Enhanced focus","Increased physical endurance","Mental clarity","Sustained energy without crashes"],"badges":["Gluten-free","Vegetarian","Non-GMO","No fillers"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/0xywy_s9uqii1.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"xwJq86wa8PDOf2zE6N5s6"}
-5:null

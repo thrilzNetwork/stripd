@@ -1,66 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCart } from "@/lib/cart-context";
 import Link from "next/link";
-
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-function useLocalCart() {
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const raw = localStorage.getItem("stripd-cart");
-    if (raw) setItems(JSON.parse(raw));
-    setLoaded(true);
-  }, []);
-
-  useEffect(() => {
-    if (!loaded) return;
-    localStorage.setItem("stripd-cart", JSON.stringify(items));
-  }, [items, loaded]);
-
-  const addItem = (id: string, name: string, price: number) => {
-    setItems((prev) => {
-      const existing = prev.find((i) => i.id === id);
-      if (existing) {
-        return prev.map((i) => (i.id === id ? { ...i, quantity: i.quantity + 1 } : i));
-      }
-      return [...prev, { id, name, price, quantity: 1 }];
-    });
-  };
-
-  const removeItem = (id: string) => {
-    setItems((prev) => prev.filter((i) => i.id !== id));
-  };
-
-  const updateQuantity = (id: string, quantity: number) => {
-    if (quantity <= 0) {
-      setItems((prev) => prev.filter((i) => i.id !== id));
-      return;
-    }
-    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, quantity } : i)));
-  };
-
-  const clearCart = () => setItems([]);
-  const count = items.reduce((sum, i) => sum + i.quantity, 0);
-  const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-
-  return { items, count, total, addItem, removeItem, updateQuantity, clearCart };
-}
+import { useState, useEffect } from "react";
 
 export default function CartContent() {
-  const { items, count, total, removeItem, updateQuantity, clearCart } = useLocalCart();
+  const { items, count, total, removeItem, updateQuantity, clearCart, checkout, loading } = useCart();
   const [ready, setReady] = useState(false);
 
   useEffect(() => setReady(true), []);
 
-  if (!ready) return <div className="min-h-dvh bg-black text-white" />;
+  if (!ready || loading) return <div className="min-h-dvh bg-black text-white" />;
 
   return (
     <div className="min-h-dvh bg-black text-white">
@@ -136,7 +86,10 @@ export default function CartContent() {
               </div>
             </div>
 
-            <button className="w-full rounded-full bg-white py-4 text-sm font-bold text-black mb-3">
+            <button
+              onClick={checkout}
+              className="w-full rounded-full bg-white py-4 text-sm font-bold text-black mb-3"
+            >
               Checkout — ${total.toFixed(2)}
             </button>
             <button

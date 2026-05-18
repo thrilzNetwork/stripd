@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
+import { useCart } from "@/lib/cart-context";
 
 interface CartItem {
   id: string;
@@ -52,28 +53,23 @@ function CheckIcon({ className = "w-4 h-4" }: { className?: string }) {
 }
 
 export default function ProductPageClient({ product }: { product: Product }) {
-  const [cartCount, setCartCount] = useState(0);
+  const { count: cartCount, addItem } = useCart();
   const [added, setAdded] = useState(false);
   const [qty, setQty] = useState(1);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const cart: CartItem[] = JSON.parse(localStorage.getItem("stripd-cart") || "[]");
-    setCartCount(cart.reduce((acc, i) => acc + i.quantity, 0));
   }, []);
 
-  const addToCart = () => {
+  const addToCart = async () => {
     try {
-      const items: CartItem[] = JSON.parse(localStorage.getItem("stripd-cart") || "[]");
-      const existing = items.find((i) => i.id === product.id);
-      if (existing) {
-        existing.quantity += qty;
-      } else {
-        items.push({ id: product.id, name: product.name, price: 34.99, quantity: qty });
-      }
-      localStorage.setItem("stripd-cart", JSON.stringify(items));
-      setCartCount((c) => c + qty);
+      await addItem({
+        id: product.id,
+        name: product.name,
+        price: 34.99,
+        merchandiseId: product.id, // Placeholder — needs real Shopify variant ID
+      });
       setAdded(true);
       setTimeout(() => setAdded(false), 1500);
     } catch {

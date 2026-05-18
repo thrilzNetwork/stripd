@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[6016,["/_next/static/chunks/0ocb95g47eo.k.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0xywy_s9uqii1.js"],"default"]
-3:I[97367,["/_next/static/chunks/0ocb95g47eo.k.js","/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"product":{"id":"bone","name":"Bone Stripd","tagline":"Strength from within.","category":"Wellness","original":"Bone Support Strips","flavor":"Raspberry","color":"#E74C3C","ingredients":"Vitamin D3 2000 IU, Vitamin K2 120mcg","amount":"30 oral strips","description":"Support your body's natural bone health processes with Vitamin D3 and Vitamin K2. These essential nutrients work together to help maintain normal calcium absorption and bone maintenance. Each delicious raspberry-flavored strip dissolves quickly — no water required.","benefits":["Essential for Bone Support","Supports Bone Strength","Perfect for On-the-Go","Helps Maintain Normal Immune Function"],"badges":["Gluten-free","All natural","Antibiotic-free","No fillers"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/0xywy_s9uqii1.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"xwJq86wa8PDOf2zE6N5s6"}
-5:null

@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[6016,["/_next/static/chunks/0ocb95g47eo.k.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0xywy_s9uqii1.js"],"default"]
-3:I[97367,["/_next/static/chunks/0ocb95g47eo.k.js","/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"product":{"id":"rest","name":"Rest Stripd","tagline":"Sleep without the grogginess.","category":"Sleep","original":"Sleep Strips","flavor":"Raspberry","color":"#5B8DEF","ingredients":"Valerian Root, Lavender, Chamomile, Hibiscus, Melatonin","amount":"30 oral strips","description":"A non-addictive sleep aid formulated with Valerian Root, Lavender, Chamomile, and Melatonin. These fast-dissolving strips help enhance sleep quality and promote overall well-being so you wake up refreshed — not groggy.","benefits":["Enhanced sleep quality","Overall well-being","Increased energy levels","Non-addictive sleep aid"],"badges":["Gluten-free","Vegan friendly","Halal","Non-GMO"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/0xywy_s9uqii1.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"xwJq86wa8PDOf2zE6N5s6"}
-5:null
