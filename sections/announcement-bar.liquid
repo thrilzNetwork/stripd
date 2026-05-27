@@ -1,0 +1,274 @@
+{% comment %} Announcement Bar Section {% endcomment %}
+{% if section.settings.show_announcement %}
+  <div class="announcement-bar {% if section.settings.sticky %}sticky{% endif %}" id="announcement-bar">
+    <div class="announcement-inner">
+      <div class="announcement-content">
+        {% if section.settings.icon != blank %}
+          <span class="announcement-icon">{{ section.settings.icon }}</span>
+        {% endif %}
+        <span class="announcement-text">{{ section.settings.text }}</span>
+
+        {% if section.settings.show_countdown and section.settings.countdown_date != blank %}
+          <div class="countdown" data-end-date="{{ section.settings.countdown_date }}">
+            <span class="countdown-label">Ends in:</span>
+            <div class="countdown-units">
+              <div class="countdown-unit"><span class="countdown-value" data-days>00</span><span class="countdown-label-sm">d</span></div>
+              <div class="countdown-unit"><span class="countdown-value" data-hours>00</span><span class="countdown-label-sm">h</span></div>
+              <div class="countdown-unit"><span class="countdown-value" data-minutes>00</span><span class="countdown-label-sm">m</span></div>
+              <div class="countdown-unit"><span class="countdown-value" data-seconds>00</span><span class="countdown-label-sm">s</span></div>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.link_text != blank and section.settings.link_url != blank %}
+          <a href="{{ section.settings.link_url }}" class="announcement-link">{{ section.settings.link_text }} →</a>
+        {% endif %}
+      </div>
+
+      {% if section.settings.show_close %}
+        <button class="announcement-close" aria-label="Close announcement">×</button>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+<style>
+.announcement-bar {
+  background: {{ section.settings.bg_color | default: '#ffffff' }};
+  color: {{ section.settings.text_color | default: '#000000' }};
+  padding: 12px 16px;
+  position: relative;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.announcement-bar.sticky {
+  position: sticky;
+  top: 0;
+}
+.announcement-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.announcement-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  text-align: center;
+}
+.announcement-icon {
+  font-size: 14px;
+}
+.announcement-text {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.announcement-link {
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  border-left: 1px solid rgba(0,0,0,0.1);
+}
+.countdown-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.countdown-units {
+  display: flex;
+  gap: 4px;
+}
+.countdown-unit {
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+}
+.countdown-value {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  min-width: 20px;
+  text-align: center;
+}
+.countdown-label-sm {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.announcement-close {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.announcement-close:hover {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .announcement-bar {
+    padding: 10px 12px;
+  }
+  .announcement-text {
+    font-size: 12px;
+  }
+  .countdown {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+  }
+  .countdown-label {
+    display: none;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Countdown timer
+  const countdownEl = document.querySelector('.countdown');
+  if (countdownEl) {
+    const endDate = new Date(countdownEl.dataset.endDate).getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+
+      if (distance < 0) {
+        countdownEl.style.display = 'none';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.querySelector('[data-days]').textContent = String(days).padStart(2, '0');
+      countdownEl.querySelector('[data-hours]').textContent = String(hours).padStart(2, '0');
+      countdownEl.querySelector('[data-minutes]').textContent = String(minutes).padStart(2, '0');
+      countdownEl.querySelector('[data-seconds]').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+
+  // Close button
+  const closeBtn = document.querySelector('.announcement-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      document.getElementById('announcement-bar').style.display = 'none';
+      localStorage.setItem('announcement-closed', Date.now());
+    });
+
+    // Check if closed recently (within 24 hours)
+    const closed = localStorage.getItem('announcement-closed');
+    if (closed && Date.now() - closed < 86400000) {
+      document.getElementById('announcement-bar').style.display = 'none';
+    }
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky bar",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close",
+      "label": "Show close button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "Icon (emoji or text)",
+      "default": "🚀"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "Free shipping on orders over $50"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show countdown timer",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "countdown_date",
+      "label": "Countdown end date",
+      "info": "Format: YYYY-MM-DD HH:MM:SS"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

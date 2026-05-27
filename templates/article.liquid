@@ -1,0 +1,352 @@
+{% comment %} Article/Blog Post Template - Premium {% endcomment %}
+<article class="article-page">
+  <div class="article-hero">
+    {% if article.image %}
+      <div class="article-hero-image">
+        <img src="{{ article.image | image_url: width: 1600, height: 900, crop: 'center' }}" alt="{{ article.title }}" width="800" height="450">
+      </div>
+    {% endif %}
+
+    <div class="article-hero-content">
+      <div class="article-meta">
+        <span class="article-category">{{ article.tags.first | default: 'Wellness' }}</span>
+        <span class="article-dot">·</span>
+        <span class="article-date">{{ article.published_at | date: '%B %d, %Y' }}</span>
+        <span class="article-dot">·</span>
+        <span class="article-readtime">{{ article.content | strip_html | size | divided_by: 1000 | plus: 1 }} min read</span>
+      </div>
+      <h1 class="article-title">{{ article.title }}</h1>
+      {% if article.excerpt != blank %}
+        <p class="article-excerpt">{{ article.excerpt }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="article-body">
+    <div class="article-content rte">
+      {{ article.content }}
+    </div>
+
+    {% if article.tags.size > 0 %}
+      <div class="article-tags">
+        <span class="tags-label">Tags:</span>
+        {% for tag in article.tags %}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="article-share">
+      <span class="share-label">Share:</span>
+      <a href="https://twitter.com/intent/tweet?text={{ article.title | url_encode }}&url={{ shop.url | append: article.url | url_encode }}" target="_blank" class="share-btn" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: article.url | url_encode }}" target="_blank" class="share-btn" aria-label="Share on Facebook">f</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ shop.url | append: article.url | url_encode }}" target="_blank" class="share-btn" aria-label="Share on LinkedIn">in</a>
+    </div>
+  </div>
+
+  <div class="article-navigation">
+    <a href="/blogs/news" class="back-to-blog">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to {{ blog.title }}
+    </a>
+
+    {% if blog.previous_article or blog.next_article %}
+      <div class="article-nav-links">
+        {% if blog.previous_article %}
+          <a href="{{ blog.previous_article.url }}" class="nav-link prev">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">{{ blog.previous_article.title | truncate: 40 }}</span>
+          </a>
+        {% endif %}
+        {% if blog.next_article %}
+          <a href="{{ blog.next_article.url }}" class="nav-link next">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">{{ blog.next_article.title | truncate: 40 }}</span>
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</article>
+
+{% section 'certification-badges' %}
+
+<style>
+.article-page {
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.article-hero {
+  padding-top: 80px;
+}
+
+.article-hero-image {
+  width: 100%;
+  aspect-ratio: 21/9;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.article-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.article-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 32px;
+  text-align: center;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.article-category {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.article-dot {
+  color: var(--text-faint);
+}
+
+.article-date,
+.article-readtime {
+  color: var(--text-faint);
+}
+
+.article-title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 640px) {
+  .article-title {
+    font-size: 42px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .article-title {
+    font-size: 52px;
+  }
+}
+
+.article-excerpt {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.article-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.article-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.article-content h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 20px;
+  letter-spacing: -0.02em;
+}
+
+.article-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 32px 0 16px;
+}
+
+.article-content p {
+  margin-bottom: 20px;
+}
+
+.article-content ul,
+.article-content ol {
+  margin-bottom: 20px;
+  padding-left: 24px;
+}
+
+.article-content li {
+  margin-bottom: 8px;
+}
+
+.article-content strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.article-content a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-content blockquote {
+  border-left: 3px solid var(--text);
+  padding-left: 24px;
+  margin: 32px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+.article-content img {
+  border-radius: 12px;
+  margin: 32px 0;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 48px 0 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tags-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-right: 8px;
+}
+
+.article-tag {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.article-tag:hover {
+  border-color: var(--border-med);
+  color: var(--text);
+}
+
+.article-share {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.share-label {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.share-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.share-btn:hover {
+  border-color: var(--border-med);
+  color: var(--text);
+}
+
+.article-navigation {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.back-to-blog {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  transition: color 0.2s;
+}
+
+.back-to-blog:hover {
+  color: var(--text);
+}
+
+.article-nav-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  border-color: var(--border-med);
+}
+
+.nav-link.next {
+  text-align: right;
+  grid-column: 2;
+}
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+}
+
+.nav-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+</style>

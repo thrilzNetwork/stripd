@@ -1,0 +1,151 @@
+{% comment %} Certification Badges with SVG Icons {% endcomment %}
+<div class="cert-badges-container">
+  <div class="cert-badges-inner">
+    <span class="cert-label">{{ section.settings.label | default: "Certified" }}</span>
+    <div class="cert-badges-row">
+      <!-- Non-GMO -->
+      <div class="cert-badge-item" title="Non-GMO Project Verified">
+        <svg viewBox="0 0 64 64" class="cert-icon">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/>
+          <text x="32" y="28" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">NON</text>
+          <text x="32" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">GMO</text>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2"/>
+        </svg>
+        <span class="cert-text">Non-GMO</span>
+      </div>
+
+      <!-- Vegan -->
+      <div class="cert-badge-item" title="100% Vegan">
+        <svg viewBox="0 0 64 64" class="cert-icon">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M32 12c-8 0-14 6-14 14 0 10 14 26 14 26s14-16 14-26c0-8-6-14-14-14z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="32" cy="26" r="4" fill="currentColor"/>
+        </svg>
+        <span class="cert-text">Vegan</span>
+      </div>
+
+      <!-- Gluten Free -->
+      <div class="cert-badge-item" title="Gluten Free">
+        <svg viewBox="0 0 64 64" class="cert-icon">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 20 L44 44 M44 20 L20 44" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <text x="32" y="36" text-anchor="middle" font-size="8" fill="currentColor">GF</text>
+        </svg>
+        <span class="cert-text">Gluten Free</span>
+      </div>
+
+      <!-- FDA Registered -->
+      <div class="cert-badge-item" title="FDA Registered Facility">
+        <svg viewBox="0 0 64 64" class="cert-icon">
+          <rect x="8" y="8" width="48" height="48" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+          <text x="32" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">FDA</text>
+          <text x="32" y="44" text-anchor="middle" font-size="7" fill="currentColor">REGISTERED</text>
+        </svg>
+        <span class="cert-text">FDA Reg</span>
+      </div>
+
+      <!-- GMP -->
+      <div class="cert-badge-item" title="GMP Certified">
+        <svg viewBox="0 0 64 64" class="cert-icon">
+          <polygon points="32,4 60,20 60,52 32,60 4,52 4,20" fill="none" stroke="currentColor" stroke-width="2"/>
+          <text x="32" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">GMP</text>
+          <text x="32" y="44" text-anchor="middle" font-size="6" fill="currentColor">CERTIFIED</text>
+        </svg>
+        <span class="cert-text">GMP</span>
+      </div>
+
+      <!-- Made in USA -->
+      <div class="cert-badge-item" title="Made in USA">
+        <svg viewBox="0 0 64 64" class="cert-icon">
+          <rect x="4" y="12" width="56" height="40" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M4 12 L32 32 L60 12" fill="none" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <text x="32" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">USA</text>
+        </svg>
+        <span class="cert-text">USA Made</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.cert-badges-container {
+  padding: 40px 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+  border-top: 1px solid var(--border-subtle);
+}
+.cert-badges-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cert-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-faint);
+  margin-bottom: 20px;
+}
+.cert-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+.cert-badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+.cert-badge-item:hover {
+  opacity: 1;
+}
+.cert-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--text-muted);
+}
+.cert-text {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+@media (max-width: 640px) {
+  .cert-badges-row {
+    gap: 20px;
+  }
+  .cert-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .cert-text {
+    font-size: 9px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Certification Badges",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label text",
+      "default": "Certified"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certification Badges"
+    }
+  ]
+}
+{% endschema %}

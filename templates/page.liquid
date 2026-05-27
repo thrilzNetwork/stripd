@@ -1,0 +1,473 @@
+{% comment %} Page Template - About/Story Premium {% endcomment %}
+<div class="page-container">
+
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <span class="hero-label">{{ page.title }}</span>
+      <h1 class="hero-headline">
+        {% if page.title == 'About' or page.title == 'Our Story' %}
+          The future of supplements is a strip.
+        {% else %}
+          {{ page.title }}
+        {% endif %}
+      </h1>
+      <p class="hero-sub">
+        {% if page.title == 'About' or page.title == 'Our Story' %}
+          No pills. No powders. No water. Just dissolve and go.
+        {% endif %}
+      </p>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="hero-particles">
+      {% for i in (1..8) %}
+        <div class="particle" style="--delay: {{ i | times: 0.3 }}s; --size: {{ i | modulo: 3 | plus: 1 }}px;"></div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="page-content-wrapper">
+    {% if page.title == 'About' or page.title == 'Our Story' %}
+
+      <!-- Story Blocks -->
+      <section class="story-section">
+        <div class="story-grid">
+
+          <div class="story-block" data-reveal>
+            <span class="block-number">01</span>
+            <h2 class="block-title">The Problem</h2>
+            <p class="block-text">Supplements have been stuck in the past for decades. Giant pills you struggle to swallow. Powders that require shaker cups and measuring scoops. Gummies packed with sugar. Most people give up on their wellness routines not because they don't work, but because they're inconvenient.</p>
+          </div>
+
+          <div class="story-block" data-reveal>
+            <span class="block-number">02</span>
+            <h2 class="block-title">The Solution</h2>
+            <p class="block-text">We asked a simple question: what if taking a supplement was as easy as putting a strip on your tongue? No water fountain required. No measuring. No mess. Just precise dosing that dissolves in seconds and absorbs directly into your bloodstream through the oral mucosa — faster and more efficiently than pills or powders.</p>
+          </div>
+
+          <div class="story-block" data-reveal>
+            <span class="block-number">03</span>
+            <h2 class="block-title">Our Mission</h2>
+            <p class="block-text">STRIPD exists to make daily wellness effortless. We combine cutting-edge oral strip technology with premium, clinically-backed ingredients across 13 targeted formulas. Whether you need better sleep, sharper focus, glowing skin, or a hangover rescue — there's a strip for that.</p>
+          </div>
+
+          <div class="story-block highlight" data-reveal>
+            <span class="block-number">04</span>
+            <h2 class="block-title">The Promise</h2>
+            <div class="promise-grid">
+              <div class="promise-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span>Gluten-Free</span>
+              </div>
+              <div class="promise-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span>Vegan Friendly</span>
+              </div>
+              <div class="promise-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span>Halal Certified</span>
+              </div>
+              <div class="promise-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span>Non-GMO</span>
+              </div>
+              <div class="promise-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span>Cruelty-Free</span>
+              </div>
+              <div class="promise-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span>No Sugar Added</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="stats-section" data-reveal>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number">13</span>
+            <span class="stat-label">Formulas</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">10K+</span>
+            <span class="stat-label">Happy Customers</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">3x</span>
+            <span class="stat-label">Faster Absorption</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Pills Required</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="page-cta" data-reveal>
+        <h2 class="cta-title">Ready to get STRIPD?</h2>
+        <p class="cta-text">Join thousands who've made the switch from pills to strips.</p>
+        <a href="/" class="btn btn-primary btn-large">Explore Formulas</a>
+      </section>
+
+    {% else %}
+      <!-- Generic Page Content -->
+      <div class="generic-content rte">
+        {{ page.content }}
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% section 'certification-badges' %}
+
+<style>
+.page-container {
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  padding-top: 60px;
+}
+
+/* Hero */
+.page-hero {
+  position: relative;
+  padding: 100px 24px 80px;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.page-hero-inner {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  animation: float-particle 6s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+
+.hero-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-faint);
+  margin-bottom: 16px;
+}
+
+.hero-headline {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 640px) {
+  .hero-headline {
+    font-size: 52px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-headline {
+    font-size: 64px;
+  }
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Content Wrapper */
+.page-content-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Story Section */
+.story-section {
+  padding: 80px 0;
+}
+
+.story-grid {
+  display: grid;
+  gap: 48px;
+}
+
+@media (min-width: 768px) {
+  .story-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+.story-block {
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.story-block:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-4px);
+}
+
+.story-block.highlight {
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+  border-color: rgba(255,255,255,0.15);
+}
+
+@media (min-width: 768px) {
+  .story-block.highlight {
+    grid-column: span 2;
+  }
+}
+
+.block-number {
+  display: block;
+  font-size: 12px;
+  font-family: monospace;
+  color: var(--text-faint);
+  margin-bottom: 12px;
+}
+
+.block-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.block-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Promise Grid */
+.promise-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+@media (min-width: 640px) {
+  .promise-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.promise-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.promise-item svg {
+  color: #4ade80;
+  flex-shrink: 0;
+}
+
+/* Stats Section */
+.stats-section {
+  padding: 60px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+@media (min-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+/* CTA Section */
+.page-cta {
+  text-align: center;
+  padding: 100px 0 80px;
+}
+
+.cta-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.cta-text {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.btn-large {
+  padding: 16px 40px;
+  font-size: 16px;
+}
+
+/* Generic Content */
+.generic-content {
+  padding: 60px 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.generic-content h1,
+.generic-content h2,
+.generic-content h3 {
+  color: var(--text);
+  margin: 32px 0 16px;
+}
+
+.generic-content h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.generic-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.generic-content p {
+  margin-bottom: 20px;
+}
+
+.generic-content a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Scroll Reveal Animation */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-reveal].active {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Scroll reveal
+  const revealElements = document.querySelectorAll('[data-reveal]');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+});
+</script>

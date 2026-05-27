@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <title>{{ page_title }}</title>
+  <meta name="description" content="{{ page_description | escape }}">
+  
+  {{ content_for_header }}
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'fonts.css' | asset_url | stylesheet_tag }}
+  {{ 'animations.css' | asset_url | stylesheet_tag }}
+
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #0A0A0A;
+      --surface-raised: #111111;
+      --text: #FAFAFA;
+      --text-muted: rgba(255,255,255,0.6);
+      --text-dim: rgba(255,255,255,0.4);
+      --text-faint: rgba(255,255,255,0.3);
+      --border-subtle: rgba(255,255,255,0.08);
+      --border-light: rgba(255,255,255,0.15);
+      --border-med: rgba(255,255,255,0.2);
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); color: var(--text); }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100dvh;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: rgba(250,250,250,0.15); color: #fff; }
+  </style>
+</head>
+<body>
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+  {% section 'cart-drawer' %}
+  <main role="main">
+    {{ content_for_layout }}
+  </main>
+  {% section 'footer' %}
+
+  {{ 'animations.js' | asset_url | script_tag }}
+</body>
+</html>

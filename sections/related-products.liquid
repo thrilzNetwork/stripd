@@ -1,0 +1,138 @@
+{% comment %} Related Products Section {% endcomment %}
+{% assign current_product = product %}
+{% assign related_limit = section.settings.limit | default: 4 %}
+
+{% if product and product.collections.size > 0 %}
+  {% assign current_collection = product.collections.first %}
+
+  <div class="related-products" id="related-products">
+    <div class="related-products-inner">
+      <h2 class="related-title">{{ section.settings.title | default: "You may also like" }}</h2>
+
+      <div class="related-products-grid">
+        {% assign count = 0 %}
+        {% for related_product in current_collection.products %}
+          {% if related_product.id != current_product.id and count < related_limit %}
+            {% assign count = count | plus: 1 %}
+
+            <a href="{{ related_product.url }}" class="related-product-card">
+              <div class="related-product-image">
+                {% if related_product.featured_image %}
+                  <img src="{{ related_product.featured_image | image_url: width: 400, height: 400 }}" alt="{{ related_product.title }}" loading="lazy" width="200" height="200">
+                {% else %}
+                  <div class="related-product-placeholder"></div>
+                {% endif %}
+              </div>
+              <div class="related-product-info">
+                <h3 class="related-product-name">{{ related_product.title }}</h3>
+                <p class="related-product-price">{{ related_product.price | money }}</p>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<style>
+.related-products {
+  padding: 80px 24px;
+  border-top: 1px solid var(--border-subtle);
+}
+.related-products-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.related-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.related-products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (min-width: 640px) {
+  .related-products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.related-product-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.related-product-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  background: var(--surface-raised);
+}
+.related-product-image {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--surface-raised);
+}
+.related-product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.related-product-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--surface);
+}
+.related-product-info {
+  padding: 16px;
+}
+.related-product-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.related-product-price {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+</style>
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "You may also like"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related Products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,298 @@
+{% comment %} Trust Signals Section - As Seen On, Reviews, Guarantees {% endcomment %}
+<section class="trust-signals">
+  <div class="trust-signals-inner">
+
+    {% if section.settings.show_reviews %}
+    <div class="trust-block reviews-block">
+      <div class="reviews-stars">
+        {% for i in (1..5) %}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        {% endfor %}
+      </div>
+      <p class="reviews-text"><strong>{{ section.settings.reviews_count | default: "10,000+" }}</strong> {{ section.settings.reviews_text | default: "happy customers" }}</p>
+
+      {% if section.settings.show_review_quotes %}
+      <div class="review-quotes">
+        <div class="quote-item">
+          <span class="quote-text">"{{ section.settings.quote_1 | default: "Game changer for my morning routine" }}"</span>
+          <span class="quote-author">— {{ section.settings.quote_1_author | default: "Sarah M." }}</span>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% if section.settings.show_as_seen_on %}
+    <div class="trust-block as-seen-on">
+      <span class="trust-label">{{ section.settings.as_seen_label | default: "As seen on" }}</span>
+      <div class="logo-grid">
+        <div class="logo-item">FORBES</div>
+        <div class="logo-item">MEN'S HEALTH</div>
+        <div class="logo-item">GQ</div>
+        <div class="logo-item">WELL+GOOD</div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if section.settings.show_guarantees %}
+    <div class="trust-block guarantees">
+      <div class="guarantee-grid">
+        <div class="guarantee-item">
+          <div class="guarantee-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <span class="guarantee-text">{{ section.settings.guarantee_1 | default: "30-Day Money Back" }}</span>
+        </div>
+
+        <div class="guarantee-item">
+          <div class="guarantee-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <span class="guarantee-text">{{ section.settings.guarantee_2 | default: "Free US Shipping" }}</span>
+        </div>
+
+        <div class="guarantee-item">
+          <div class="guarantee-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <span class="guarantee-text">{{ section.settings.guarantee_3 | default: "Lab Tested" }}</span>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<style>
+.trust-signals {
+  padding: 80px 24px;
+  border-top: 1px solid var(--border-subtle);
+}
+.trust-signals-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.trust-block {
+  text-align: center;
+}
+
+/* Reviews */
+.reviews-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reviews-stars {
+  display: flex;
+  gap: 4px;
+  color: #fbbf24;
+  margin-bottom: 12px;
+}
+.reviews-text {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+.reviews-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.review-quotes {
+  margin-top: 24px;
+  max-width: 500px;
+}
+.quote-item {
+  font-style: italic;
+}
+.quote-text {
+  display: block;
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.quote-author {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: normal;
+}
+
+/* As Seen On */
+.as-seen-on {
+  padding: 40px;
+  background: var(--surface);
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+}
+.trust-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-faint);
+  margin-bottom: 24px;
+}
+.logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+.logo-item {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.logo-item:hover {
+  opacity: 1;
+}
+
+/* Guarantees */
+.guarantee-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+.guarantee-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.guarantee-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+.guarantee-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .trust-signals {
+    padding: 60px 16px;
+  }
+  .logo-grid {
+    gap: 20px;
+  }
+  .logo-item {
+    font-size: 12px;
+  }
+  .guarantee-grid {
+    gap: 24px;
+  }
+  .guarantee-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Trust Signals",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show reviews",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "reviews_count",
+      "label": "Reviews count",
+      "default": "10,000+"
+    },
+    {
+      "type": "text",
+      "id": "reviews_text",
+      "label": "Reviews text",
+      "default": "happy customers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_quotes",
+      "label": "Show review quote",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "quote_1",
+      "label": "Review quote"
+    },
+    {
+      "type": "text",
+      "id": "quote_1_author",
+      "label": "Review author"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_as_seen_on",
+      "label": "Show as seen on",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "as_seen_label",
+      "label": "As seen label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_guarantees",
+      "label": "Show guarantees",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "guarantee_1",
+      "label": "Guarantee 1"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_2",
+      "label": "Guarantee 2"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_3",
+      "label": "Guarantee 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Signals"
+    }
+  ]
+}
+{% endschema %}
