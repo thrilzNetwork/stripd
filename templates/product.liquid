@@ -115,14 +115,9 @@
             </div>
 
             <button type="submit"
-                    class="btn btn-primary add-to-cart-btn {% unless current_variant.available %}sold-out{% endunless %}"
-                    id="add-to-cart"
-                    {% unless current_variant.available %}disabled{% endunless %}>
-              {% if current_variant.available %}
-                Add to Cart — <span id="add-price">{{ current_variant.price | money }}</span>
-              {% else %}
-                Sold Out
-              {% endif %}
+                    class="btn btn-primary add-to-cart-btn"
+                    id="add-to-cart">
+              Add to Cart — <span id="add-price">{{ current_variant.price | money }}</span>
             </button>
           </div>
 
@@ -651,16 +646,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Update button state on load
-    if (currentVariant.available) {
-      addToCartBtn.disabled = false;
-      addToCartBtn.classList.remove('sold-out');
-      const formattedPrice = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: productData.currency
-      }).format(currentVariant.price / 100);
-      addToCartBtn.innerHTML = `Add to Cart — <span id="add-price">${formattedPrice}</span>`;
-    }
+    // Set initial button state
+    const formattedPrice = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: productData.currency
+    }).format(currentVariant.price / 100);
+    addToCartBtn.innerHTML = `Add to Cart — <span id="add-price">${formattedPrice}</span>`;
   }
 
   // Image thumbnails
@@ -704,16 +695,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         priceEl.textContent = formattedPrice;
 
-        // Update availability - rely on Shopify's available flag (handles inventory settings)
-        if (matchingVariant.available) {
-          addToCartBtn.disabled = false;
-          addToCartBtn.classList.remove('sold-out');
-          addToCartBtn.innerHTML = `Add to Cart — <span id="add-price">${formattedPrice}</span>`;
-        } else {
-          addToCartBtn.disabled = true;
-          addToCartBtn.classList.add('sold-out');
-          addToCartBtn.textContent = 'Sold Out';
-        }
+        // Update price display - always allow add to cart
+        addToCartBtn.innerHTML = `Add to Cart — <span id="add-price">${formattedPrice}</span>`;
 
         // Update image if variant has one
         if (matchingVariant.featured_image) {
