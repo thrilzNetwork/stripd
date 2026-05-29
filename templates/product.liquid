@@ -96,8 +96,7 @@
 
             <button type="button"
                     class="btn btn-primary add-to-cart-btn"
-                    id="add-to-cart"
-                    onclick="window.location.href='/cart/'+document.getElementById('variant-id').value+':1'">
+                    id="add-to-cart">
               Add to Cart — <span id="add-price">{{ current_variant.price | money }}</span>
             </button>
           </div>
@@ -633,6 +632,12 @@ document.addEventListener('DOMContentLoaded', function() {
       currency: productData.currency
     }).format(currentVariant.price / 100);
     addToCartBtn.innerHTML = `Add to Cart — <span id="add-price">${formattedPrice}</span>`;
+
+    // Set initial click handler
+    addToCartBtn.onclick = function() {
+      const qty = parseInt(qtyInput.value) || 1;
+      window.location.href = `/cart/${currentVariant.id}:${qty}`;
+    };
   }
 
   // Image thumbnails
@@ -679,6 +684,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update price display - always allow add to cart
         addToCartBtn.innerHTML = `Add to Cart — <span id="add-price">${formattedPrice}</span>`;
 
+        // Update button click handler for this variant
+        addToCartBtn.onclick = function() {
+          const qty = parseInt(qtyInput.value) || 1;
+          window.location.href = `/cart/${matchingVariant.id}:${qty}`;
+        };
+
         // Update image if variant has one
         if (matchingVariant.featured_image) {
           // Use image_url filter via liquid-generated data, get the proper sized image
@@ -699,28 +710,15 @@ document.addEventListener('DOMContentLoaded', function() {
   if (qtyMinus) {
     qtyMinus.addEventListener('click', () => {
       const val = parseInt(qtyInput.value) || 1;
-      if (val > 1) {
-        qtyInput.value = val - 1;
-        document.getElementById('form-quantity').value = val - 1;
-      }
+      if (val > 1) qtyInput.value = val - 1;
     });
   }
   if (qtyPlus) {
     qtyPlus.addEventListener('click', () => {
       const val = parseInt(qtyInput.value) || 1;
-      if (val < 99) {
-        qtyInput.value = val + 1;
-        document.getElementById('form-quantity').value = val + 1;
-      }
+      if (val < 99) qtyInput.value = val + 1;
     });
   }
-
-  // Update button click handler when variant changes
-  addToCartBtn.onclick = function() {
-    if (!currentVariant) return;
-    const qty = parseInt(qtyInput.value) || 1;
-    window.location.href = `/cart/${currentVariant.id}:${qty}`;
-  };
 
   // Tabs
   tabHeaders.forEach(header => {
