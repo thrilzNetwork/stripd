@@ -1,13 +1,8 @@
-{% comment %}Find first available variant, or first variant if none available{% endcomment %}
+{% comment %}Force first variant regardless of inventory{% endcomment %}
 {% assign current_variant = product.selected_or_first_available_variant %}
-{% unless current_variant.available %}
-  {% for variant in product.variants %}
-    {% if variant.available %}
-      {% assign current_variant = variant %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-{% endunless %}
+{% if current_variant == blank %}
+  {% assign current_variant = product.variants.first %}
+{% endif %}
 
 <div class="product-detail">
   <div class="product-detail-inner">
@@ -82,23 +77,10 @@
                 <label class="option-label">{{ option.name }}</label>
                 <div class="option-values">
                   {% for value in option.values %}
-                    {% assign option_position = forloop.index0 %}
-                    {% assign has_available_variant = false %}
-                    {% comment %}Check if any variant with this option value is available{% endcomment %}
-                    {% for variant in product.variants %}
-                      {% if option.name == product.options[0] and variant.option1 == value and variant.available %}
-                        {% assign has_available_variant = true %}
-                      {% elsif option.name == product.options[1] and variant.option2 == value and variant.available %}
-                        {% assign has_available_variant = true %}
-                      {% elsif option.name == product.options[2] and variant.option3 == value and variant.available %}
-                        {% assign has_available_variant = true %}
-                      {% endif %}
-                    {% endfor %}
                     <button type="button"
                             class="option-btn {% if option.selected_value == value %}active{% endif %}"
                             data-option="{{ option.name }}"
-                            data-value="{{ value | escape }}"
-                            {% unless has_available_variant %}disabled{% endunless %}>
+                            data-value="{{ value | escape }}">
                       {{ value }}
                     </button>
                   {% endfor %}
