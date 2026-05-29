@@ -68,7 +68,6 @@ export default function ProductPageClient({ product }: { product: Product }) {
         id: product.id,
         name: product.name,
         price: 34.99,
-        merchandiseId: product.id, // Placeholder — needs real Shopify variant ID
       });
       setAdded(true);
       setTimeout(() => setAdded(false), 1500);
@@ -117,7 +116,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
         <div className="relative mb-6 flex aspect-square items-center justify-center rounded-3xl border border-white/[0.06] bg-[#0A0A0A]">
           <div className="relative h-64 w-64">
             <div
-              className="absolute inset-0 rounded-full blur-3xl opacity-30"
+              className="absolute inset-0 -m-8 rounded-full blur-3xl opacity-20"
               style={{ backgroundColor: product.color }}
             />
             <img

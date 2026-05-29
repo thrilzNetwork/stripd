@@ -109,7 +109,7 @@ function ProductCard({
           <img
             src={`/products/${product.id}.png`}
             alt={product.name}
-            className="relative w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] object-contain"
+            className="relative z-10 w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] object-contain drop-shadow-lg"
           />
         </div>
         <div className="absolute top-4 left-4 flex gap-1.5">
