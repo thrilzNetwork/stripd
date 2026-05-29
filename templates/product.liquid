@@ -1,4 +1,13 @@
+{% comment %}Find first available variant, or first variant if none available{% endcomment %}
 {% assign current_variant = product.selected_or_first_available_variant %}
+{% unless current_variant.available %}
+  {% for variant in product.variants %}
+    {% if variant.available %}
+      {% assign current_variant = variant %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endunless %}
 
 <div class="product-detail">
   <div class="product-detail-inner">
@@ -73,12 +82,23 @@
                 <label class="option-label">{{ option.name }}</label>
                 <div class="option-values">
                   {% for value in option.values %}
-                    {% assign variant_for_value = product.variants | where: 'option1', value | first %}
+                    {% assign option_position = forloop.index0 %}
+                    {% assign has_available_variant = false %}
+                    {% comment %}Check if any variant with this option value is available{% endcomment %}
+                    {% for variant in product.variants %}
+                      {% if option.name == product.options[0] and variant.option1 == value and variant.available %}
+                        {% assign has_available_variant = true %}
+                      {% elsif option.name == product.options[1] and variant.option2 == value and variant.available %}
+                        {% assign has_available_variant = true %}
+                      {% elsif option.name == product.options[2] and variant.option3 == value and variant.available %}
+                        {% assign has_available_variant = true %}
+                      {% endif %}
+                    {% endfor %}
                     <button type="button"
                             class="option-btn {% if option.selected_value == value %}active{% endif %}"
                             data-option="{{ option.name }}"
                             data-value="{{ value | escape }}"
-                            {% if variant_for_value.available == false %}disabled{% endif %}>
+                            {% unless has_available_variant %}disabled{% endunless %}>
                       {{ value }}
                     </button>
                   {% endfor %}
@@ -604,12 +624,43 @@ document.addEventListener('DOMContentLoaded', function() {
   const qtyPlus = document.querySelector('.qty-plus');
 
   let currentVariant = productData.variants.find(v => v.id == variantIdInput.value);
+
+  // Fallback to first available variant if current not found or not available
+  if (!currentVariant || !currentVariant.available) {
+    const availableVariant = productData.variants.find(v => v.available);
+    if (availableVariant) {
+      currentVariant = availableVariant;
+      variantIdInput.value = availableVariant.id;
+    }
+  }
+
   let selectedOptions = {};
 
   if (currentVariant) {
     currentVariant.options.forEach((opt, i) => {
       selectedOptions[productData.options[i]] = opt;
     });
+
+    // Sync button UI with current variant
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      const optName = btn.dataset.option;
+      const optValue = btn.dataset.value;
+      if (selectedOptions[optName] === optValue) {
+        document.querySelectorAll(`[data-option="${optName}"]`).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    });
+
+    // Update button state on load
+    if (currentVariant.available) {
+      addToCartBtn.disabled = false;
+      addToCartBtn.classList.remove('sold-out');
+      const formattedPrice = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: productData.currency
+      }).format(currentVariant.price / 100);
+      addToCartBtn.innerHTML = `Add to Cart — <span id="add-price">${formattedPrice}</span>`;
+    }
   }
 
   // Image thumbnails
@@ -652,9 +703,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }).format(matchingVariant.price / 100);
 
         priceEl.textContent = formattedPrice;
-        if (addPriceEl) addPriceEl.textContent = formattedPrice;
 
-        // Update availability
+        // Update availability - rely on Shopify's available flag (handles inventory settings)
         if (matchingVariant.available) {
           addToCartBtn.disabled = false;
           addToCartBtn.classList.remove('sold-out');
