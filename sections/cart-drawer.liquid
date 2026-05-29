@@ -333,40 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
   backdrop?.addEventListener('click', closeDrawer);
   closeBtn?.addEventListener('click', closeDrawer);
 
-  // AJAX Add to Cart
-  document.querySelectorAll('form[action="/cart/add"]').forEach(form => {
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-      const submitBtn = form.querySelector('[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Adding...';
-
-      try {
-        const response = await fetch('/cart/add.js', {
-          method: 'POST',
-          body: formData
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          showNotification(`${data.product_title} added to cart!`, 'success');
-          updateCartDrawer();
-          openDrawer();
-        } else {
-          throw new Error('Failed to add to cart');
-        }
-      } catch (error) {
-        showNotification('Error adding to cart. Please try again.', 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-      }
-    });
-  });
+  // Note: AJAX Add to Cart removed - using direct checkout redirect instead
 
   // Update cart drawer
   async function updateCartDrawer() {
