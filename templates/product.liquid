@@ -66,11 +66,8 @@
 
       <!-- Variant Selection -->
       <div class="product-form-wrap">
-        <form action="/cart/add" method="post" class="product-form" id="product-form" enctype="multipart/form-data" data-inventory-error="false">
-          <input type="hidden" name="form_type" value="product">
-          <input type="hidden" name="utf8" value="✓">
+        <form action="#" method="get" class="product-form" id="product-form" onsubmit="return false;">
           <input type="hidden" name="id" value="{{ current_variant.id }}" id="variant-id">
-          <input type="hidden" name="quantity" value="1" id="form-quantity">
 
           {% if product.variants.size > 1 %}
             {% for option in product.options_with_values %}
@@ -97,9 +94,10 @@
               <button type="button" class="qty-btn qty-plus" aria-label="Increase quantity">+</button>
             </div>
 
-            <button type="submit"
+            <button type="button"
                     class="btn btn-primary add-to-cart-btn"
-                    id="add-to-cart">
+                    id="add-to-cart"
+                    onclick="window.location.href='/cart/'+document.getElementById('variant-id').value+':1'">
               Add to Cart — <span id="add-price">{{ current_variant.price | money }}</span>
             </button>
           </div>
@@ -717,19 +715,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Form submission - use checkout link to bypass inventory
-  const productForm = document.getElementById('product-form');
-  if (productForm) {
-    productForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (!currentVariant) return;
-
-      const qty = parseInt(qtyInput.value) || 1;
-      // Build checkout link: /cart/[variant_id]:[quantity]
-      const checkoutUrl = `/cart/${currentVariant.id}:${qty}`;
-      window.location.href = checkoutUrl;
-    });
-  }
+  // Update button click handler when variant changes
+  addToCartBtn.onclick = function() {
+    if (!currentVariant) return;
+    const qty = parseInt(qtyInput.value) || 1;
+    window.location.href = `/cart/${currentVariant.id}:${qty}`;
+  };
 
   // Tabs
   tabHeaders.forEach(header => {
