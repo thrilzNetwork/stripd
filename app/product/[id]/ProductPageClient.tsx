@@ -66,8 +66,9 @@ export default function ProductPageClient({ product }: { product: Product }) {
     try {
       await addItem({
         id: product.id,
+        variantId: product.variantId,
         name: product.name,
-        price: 34.99,
+        price: product.price,
       });
       setAdded(true);
       setTimeout(() => setAdded(false), 1500);
@@ -133,7 +134,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
 
         {/* Price */}
         <div className="mb-6 flex items-baseline gap-3">
-          <span className="text-2xl font-semibold">$34.99</span>
+          <span className="text-2xl font-semibold">${product.price.toFixed(2)}</span>
           <span className="text-sm text-white/40">{product.amount}</span>
         </div>
 

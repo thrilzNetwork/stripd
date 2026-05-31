@@ -128,7 +128,7 @@ function ProductCard({
         <h3 className="text-base font-bold tracking-tight text-white">{product.name}</h3>
         <p className="text-[12px] text-white/40 mt-1">{product.tagline}</p>
         <div className="flex items-center gap-2 mt-4">
-          <span className="text-lg font-bold text-white">$34.99</span>
+          <span className="text-lg font-bold text-white">${product.price?.toFixed(2) ?? "34.99"}</span>
           <span className="text-[11px] text-white/30">30 oral strips</span>
         </div>
       </div>

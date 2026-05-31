@@ -2,6 +2,8 @@ export const categories = ["All", "Beauty", "Cognitive", "Digestive", "Sleep", "
 
 export interface Product {
   id: string;
+  variantId: string;
+  price: number;
   name: string;
   tagline: string;
   category: string;
@@ -17,7 +19,7 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    id: "recover",
+    id: "recover", variantId: "51701265465560", price: 36.5,
     name: "Recover Stripd",
     tagline: "The morning after, handled.",
     category: "Wellness",
@@ -31,7 +33,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "Vegan friendly", "Halal", "Non-GMO"],
   },
   {
-    id: "glow",
+    id: "glow", variantId: "51701263761624", price: 32.9,
     name: "Glow Stripd",
     tagline: "Beauty that dissolves on your tongue.",
     category: "Beauty",
@@ -45,7 +47,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "All natural", "Cruelty Free", "Hormone-free"],
   },
   {
-    id: "renew",
+    id: "renew", variantId: "51701259206872", price: 28.9,
     name: "Renew Stripd",
     tagline: "Collagen simplified.",
     category: "Beauty",
@@ -59,7 +61,7 @@ export const products: Product[] = [
     badges: ["Lactose-free", "Hormone-free", "All natural", "No fillers"],
   },
   {
-    id: "focus",
+    id: "focus", variantId: "51701258059992", price: 39.0,
     name: "Focus Stripd",
     tagline: "Mushroom-powered clarity.",
     category: "Cognitive",
@@ -73,7 +75,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "Vegetarian", "All natural", "Alcohol Free"],
   },
   {
-    id: "passion",
+    id: "passion", variantId: "51701256552664", price: 37.9,
     name: "Passion Stripd",
     tagline: "Vitality, recharged.",
     category: "Wellness",
@@ -87,7 +89,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "Hormone-free", "Antibiotic-free", "Cruelty Free"],
   },
   {
-    id: "gut",
+    id: "gut", variantId: "51701268087000", price: 39.0,
     name: "Gut Stripd",
     tagline: "10 billion allies on your tongue.",
     category: "Digestive",
@@ -101,7 +103,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "All natural", "Antibiotic-free", "Cruelty Free"],
   },
   {
-    id: "bone",
+    id: "bone", variantId: "51701254455512", price: 28.9,
     name: "Bone Stripd",
     tagline: "Strength from within.",
     category: "Wellness",
@@ -115,7 +117,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "All natural", "Antibiotic-free", "No fillers"],
   },
   {
-    id: "digest",
+    id: "digest", variantId: "51701232959704", price: 35.9,
     name: "Digest Stripd",
     tagline: "Your gut's second brain.",
     category: "Digestive",
@@ -129,7 +131,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "Vegetarian", "All natural", "Cruelty Free"],
   },
   {
-    id: "power",
+    id: "power", variantId: "51701251768536", price: 36.5,
     name: "Power Stripd",
     tagline: "Clean energy without the crash.",
     category: "Cognitive",
@@ -143,7 +145,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "Vegetarian", "Non-GMO", "No fillers"],
   },
   {
-    id: "rest",
+    id: "rest", variantId: "51701228765400", price: 36.5,
     name: "Rest Stripd",
     tagline: "Sleep without the grogginess.",
     category: "Sleep",
@@ -157,7 +159,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "Vegan friendly", "Halal", "Non-GMO"],
   },
   {
-    id: "iron",
+    id: "iron", variantId: "51701251113176", price: 28.9,
     name: "Iron Stripd",
     tagline: "Oxygen in a strip.",
     category: "Wellness",
@@ -171,7 +173,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "Vegetarian", "All natural", "Cruelty Free"],
   },
   {
-    id: "balance",
+    id: "balance", variantId: "51701267890392", price: 35.9,
     name: "Balance Stripd",
     tagline: "Mindful eating, simplified.",
     category: "Wellness",
@@ -185,7 +187,7 @@ export const products: Product[] = [
     badges: ["Gluten-free", "Vegan friendly", "Antibiotic-free", "Alcohol Free"],
   },
   {
-    id: "calm",
+    id: "calm", variantId: "51701233778904", price: 32.9,
     name: "Calm Stripd",
     tagline: "Find your center, instantly.",
     category: "Cognitive",

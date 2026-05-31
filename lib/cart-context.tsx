@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 
 export interface CartItem {
   id: string;
+  variantId: string;
   name: string;
   price: number;
   quantity: number;
@@ -15,7 +16,7 @@ interface CartContextType {
   total: number;
   checkoutUrl: string;
   loading: boolean;
-  addItem: (item: Omit<CartItem, "quantity"> & { merchandiseId?: string }) => void;
+  addItem: (item: Omit<CartItem, "quantity">) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -53,7 +54,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const count = items.reduce((sum, item) => sum + item.quantity, 0);
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const addItem = useCallback((item: Omit<CartItem, "quantity"> & { merchandiseId?: string }) => {
+  const addItem = useCallback((item: Omit<CartItem, "quantity">) => {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
@@ -61,7 +62,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
-      return [...prev, { id: item.id, name: item.name, price: item.price, quantity: 1 }];
+      return [...prev, { id: item.id, variantId: item.variantId, name: item.name, price: item.price, quantity: 1 }];
     });
   }, []);
 
@@ -84,9 +85,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const checkout = useCallback(() => {
-    // Redirect to Shopify checkout with cart items
-    const cartData = encodeURIComponent(JSON.stringify(items));
-    window.location.href = `https://0gn1c6-1b.myshopify.com/cart/${cartData}`;
+    const cartLine = items
+      .filter((i) => i.variantId)
+      .map((i) => i.variantId + ":" + i.quantity)
+      .join(",");
+    if (!cartLine) return;
+    window.location.href = "https://0gn1c6-1b.myshopify.com/cart/" + cartLine;
   }, [items]);
 
   return (
